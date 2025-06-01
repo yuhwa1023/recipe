@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Generated Recipe</title>
-    </head>
-    <body>
-        <h2>2022810033_배유화</h2>
-        <h2>Your Recipe:</h2>
-        <p>{{ recipe|safe }}</p>
-        <a href="/">Generate another recipe</a>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<div id="root" class="container mt-4">
+  <div class="page-header">
+    <h2 class="alert alert-success">Generated Recipe</h2>
+    <p>{{ recipe | safe }}</p>
+    <a href="/" class="btn btn-secondary mt-3">Generate another recipe</a>
+  </div>
+</div>
+{% endblock %}

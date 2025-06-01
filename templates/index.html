@@ -1,48 +1,47 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Recipe Generator</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    </head>
-    <body>
-        <h3>2022810033_배유화</h3>
-        <h2>Input 3 Ingredients</h2>
-        <form action="/generate_recipe" method="post">
-            <input type="text" name="ingredient"
-            placeholder="Ingredient 1" required>
-            <input type="text" name="ingredient"
-            placeholder="Ingredient 2" required>
-            <input type="text" name="ingredient"
-            placeholder="Ingredient 3" required>
+{% extends "base.html" %}
+{% block content %}
 
-            <label class="subheading" for="cuisine">Choose a cuisine:</label>
-            <select name="cuisine" id="cuisine">
-                {% for cuisine in cuisines %}
-                <option value="{{ cuisine|lower|replace(' ', '_') }}">{{ cuisine }}</option>
-                {% endfor %}
-            </select>
-            
-            <label class="subheading" for="restrictions">Dietary Restrictions:</label>
-            <div class="checkbox-container">
-                {% for restriction in dietary_restrictions %}
-                <div class="checkbox-group">
-                <label class="checkbox-label">
-                    <input type="checkbox" name="restrictions" value="{{ restriction }}">
-                    {{ restriction }}
-                </label>
-                </div>
-                {% endfor %}
-            </div>
-            
-            <label class="subheading" for="language">Choose a language:</label>
-            <select name="language" id="language">
-                {% for language in languages %}
-                <option value="{{ language|lower|replace(' ', '_')}}">
-                    {{ language }}
-                </option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Generate Recipe">
-        </form>
-    </body>
-</html>
+<div class="container mt-4">
+  <h2>Input 3 Ingredients</h2>
+  <form action="/generate_recipe" method="post">
+    <!-- Ingredients -->
+    <input type="text" name="ingredient" placeholder="Ingredient 1" required />
+    <input type="text" name="ingredient" placeholder="Ingredient 2" required />
+    <input type="text" name="ingredient" placeholder="Ingredient 3" required />
+
+    <!-- Cuisine Selection -->
+    <label class="subheading mt-3" for="cuisine">Choose a cuisine:</label>
+    <select name="cuisine" id="cuisine">
+      {% for cuisine in cuisines %}
+        <option value="{{ cuisine|lower|replace(' ', '_') }}">{{ cuisine }}</option>
+      {% endfor %}
+    </select>
+
+    <!-- Dietary Restrictions -->
+    <label class="subheading mt-3" for="restrictions">Dietary Restrictions:</label>
+    <div class="checkbox-container">
+      {% for restriction in dietary_restrictions %}
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" name="restrictions" value="{{ restriction|lower|replace(' ', '_') }}">
+            {{ restriction }}
+          </label>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Language Selection -->
+    <label class="subheading mt-3" for="language">Choose a language:</label>
+    <select name="language" id="language">
+      {% for language in languages %}
+        <option value="{{ language|lower|replace(' ', '_') }}">{{ language }}</option>
+      {% endfor %}
+    </select>
+
+    <!-- Submit Button -->
+    <div class="mt-3">
+      <input type="submit" class="btn btn-primary" value="Generate Recipe" />
+    </div>
+  </form>
+</div>
+{% endblock %}
